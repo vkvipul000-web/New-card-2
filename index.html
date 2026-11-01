@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5e0b1e">
+<title>शुभ विवाह | सुनील संग प्रिया</title>
+
+<!-- Google Fonts: Calligraphic & Bold Devanagari + Royal English Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amita:wght@700&family=Yatra+One&family=Rozha+One&family=Noto+Sans+Devanagari:wght@500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --royal-maroon: #5e0b1e;
+  --deep-wine: #7a1129;
+  --gold-bright: #f7d070;
+  --gold-dark: #b8862d;
+  --cream-bg: #fffbf2;
+  --card-bg: #ffffff;
+  --text-dark: #3b0914;
+  --text-muted: #662230;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream-bg);
+  color: var(--text-dark);
+  font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+  overflow-x: hidden;
+  font-weight: 600;
+}
+
+/* Lock scrolling while the door is closed */
+body.scroll-locked {
+  overflow: hidden !important;
+  height: 100svh;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   3D ROYAL DOOR OVERLAY (शाही दरवाज़ा)
+   ========================================================= */
+.door-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  perspective: 1400px;
+  background: radial-gradient(circle, rgba(94,11,30,0.4), rgba(30,2,8,0.85));
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.8s ease 1s, visibility 0.8s ease 1s;
+}
+
+.door-wrapper.opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.door-panel {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  background: 
+    radial-gradient(circle at center, #85142e 0%, #4a0615 100%);
+  border: 4px solid var(--gold-dark);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.75);
+  transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+   flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 14px;
+  overflow: hidden;
+}
+
+/* Intricate Golden Jaali Pattern on Doors */
+.door-panel::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 2px dashed rgba(247, 208, 112, 0.55);
+  border-radius: 12px;
+  background-image: radial-gradient(rgba(247, 208, 1
