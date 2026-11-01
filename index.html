@@ -3,113 +3,285 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5e0b1e">
 <title>शुभ विवाह | सुनील संग प्रिया</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amita:wght@700&family=Yatra+One&family=Rozha+One&family=Noto+Sans+Devanagari:wght@600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root { --maroon:#5e0b1e; --wine:#7a1129; --gold:#f7d070; --gold-dark:#b8862d; --cream:#fffbf2; --dark:#3b0914; }
-* { box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; }
-body { background:var(--cream); color:var(--dark); font-family:'Poppins','Noto Sans Devanagari',sans-serif; overflow-x:hidden; font-weight:700; }
-body.locked { overflow:hidden !important; height:100vh; }
+:root {
+  --maroon: #5e0b1e;
+  --wine: #7a1129;
+  --gold: #f7d070;
+  --gold-dark: #b8862d;
+  --cream: #fffbf2;
+  --dark: #3b0914;
+}
 
-/* Music Button */
-.music-btn { position:fixed; bottom:18px; right:16px; z-index:9000; display:none; align-items:center; gap:8px; padding:12px 18px; border-radius:50px; background:var(--maroon); color:#fff; border:2.5px solid var(--gold); box-shadow:0 8px 25px rgba(0,0,0,0.4); font-size:14px; font-weight:700; cursor:pointer; }
-.music-btn.show { display:flex; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--dark);
+  font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+  overflow-x: hidden;
+  font-weight: 700;
+}
+body.locked { overflow: hidden !important; height: 100svh; }
 
-/* 3D Royal Door */
-.door-wrap { position:fixed; inset:0; z-index:9999; display:flex; perspective:1200px; background:rgba(30,2,8,0.9); cursor:pointer; transition:opacity 0.8s ease 0.9s, visibility 0.8s ease 0.9s; }
-.door-wrap.open { opacity:0; visibility:hidden; pointer-events:none; }
-.door { width:50%; height:100%; background:radial-gradient(circle,#85142e,#4a0615); border:4px solid var(--gold-dark); box-shadow:inset 0 0 35px rgba(0,0,0,0.8); transition:transform 1.2s ease-in-out; position:relative; }
-.door::before { content:""; position:absolute; inset:12px; border:2px dashed rgba(247,208,112,0.5); border-radius:10px; }
-.door-l { transform-origin:left center; border-right:3px solid var(--gold); }
-.door-r { transform-origin:right center; border-left:3px solid var(--gold); }
-.door-wrap.open .door-l { transform:rotateY(-115deg); }
-.door-wrap.open .door-r { transform:rotateY(115deg); }
+/* Music Toggle Button */
+.music-btn {
+  position: fixed; bottom: 18px; right: 16px; z-index: 9000;
+  display: none; align-items: center; gap: 8px;
+  padding: 12px 18px; border-radius: 50px;
+  background: linear-gradient(135deg, var(--wine), var(--maroon));
+  color: #fff; border: 2.5px solid var(--gold);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+  font-size: 14px; font-weight: 700; cursor: pointer;
+}
+.music-btn.show { display: flex; animation: pulseGlow 2s infinite; }
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(247,208,112,0.7), 0 8px 20px rgba(0,0,0,0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(247,208,112,0), 0 8px 20px rgba(0,0,0,0.4); }
+}
 
-.seal { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; width:min(86vw,310px); padding:24px 18px; border-radius:24px; background:linear-gradient(145deg,#fffdf7,#fceac5); border:4px solid var(--gold-dark); box-shadow:0 15px 45px rgba(0,0,0,0.8); text-align:center; transition:0.5s; animation:pulse 2s infinite; }
-.door-wrap.open .seal { transform:translate(-50%,-50%) scale(0.3); opacity:0; }
-@keyframes pulse { 0%,100%{transform:translate(-50%,-50%) scale(1);} 50%{transform:translate(-50%,-50%) scale(1.04);} }
-.seal-title { font-family:'Yatra One',cursive; font-size:34px; color:var(--wine); margin:4px 0; }
-.seal-names { font-family:'Rozha One',serif; font-size:28px; color:var(--dark); margin:8px 0; }
-.tap-btn { display:inline-block; margin-top:10px; padding:12px 22px; border-radius:50px; background:var(--maroon); color:#fff; font-size:15px; border:2px solid var(--gold); }
+/* 3D Royal Door Overlay */
+.door-wrap {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; perspective: 1400px;
+  background: rgba(30, 2, 8, 0.9);
+  cursor: pointer; user-select: none;
+  transition: opacity 0.8s ease 1s, visibility 0.8s ease 1s;
+}
+.door-wrap.open { opacity: 0; visibility: hidden; pointer-events: none; }
 
-/* Hero & Sections */
-.hero { min-height:100vh; padding:30px 14px; text-align:center; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#fffdf8,#ffeef2); border-bottom:4px double var(--gold-dark); }
-.frame { width:100%; max-width:600px; padding:28px 16px; border:3px solid var(--gold-dark); border-radius:26px; background:rgba(255,255,255,0.92); box-shadow:0 15px 40px rgba(94,11,30,0.12); }
-.shubh-badge { display:inline-block; margin:10px auto 16px; padding:10px 30px; background:linear-gradient(135deg,#7a1129,#4f0718); border:3px solid var(--gold); border-radius:60px; }
-.shubh-text { font-family:'Amita','Yatra One',cursive; font-size:clamp(32px,8vw,46px); color:var(--gold); line-height:1.2; display:block; }
-.big-name { font-family:'Rozha One',serif; font-size:clamp(52px,13vw,76px); line-height:1.25; color:var(--maroon); text-shadow:2px 2px 0px #f5d17f; }
-.sang { font-family:'Yatra One',cursive; font-size:26px; color:var(--gold-dark); margin:6px 0; }
-.date-pill { display:inline-block; margin-top:14px; padding:10px 24px; background:#fff6e0; border:2px solid var(--gold-dark); border-radius:14px; font-size:clamp(22px,5.5vw,28px); font-weight:800; color:var(--maroon); }
+.door {
+  width: 50%; height: 100%; position: relative;
+  background: radial-gradient(circle at center, #85142e 0%, #4a0615 100%);
+  border: 4px solid var(--gold-dark);
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+  transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 20px 12px;
+}
+.door::before {
+  content: ""; position: absolute; inset: 12px;
+  border: 2px dashed rgba(247,208,112,0.55); border-radius: 10px;
+  background-image: radial-gradient(rgba(247,208,112,0.15) 2px, transparent 2px);
+  background-size: 22px 22px; pointer-events: none;
+}
+.door-l { transform-origin: left center; border-right: 3px solid var(--gold); }
+.door-r { transform-origin: right center; border-left: 3px solid var(--gold); text-align: right; }
+.door-wrap.open .door-l { transform: rotateY(-115deg); }
+.door-wrap.open .door-r { transform: rotateY(115deg); }
+.ornament { color: var(--gold); font-size: 30px; opacity: 0.85; }
 
-.sec { padding:55px 16px; text-align:center; }
-.sec-title { font-family:'Yatra One',serif; font-size:clamp(30px,7vw,40px); color:var(--maroon); margin-bottom:12px; }
-.card { width:100%; max-width:460px; margin:0 auto; padding:28px 18px; border:3px solid var(--gold-dark); border-radius:24px; background:#fff; box-shadow:0 12px 30px rgba(94,11,30,0.1); }
-.lbl { font-size:14px; color:var(--gold-dark); margin-top:16px; font-weight:800; }
-.val { font-size:clamp(20px,5vw,24px); font-weight:800; color:var(--dark); margin-top:4px; }
+.seal {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); z-index: 10;
+  width: min(88vw, 315px); padding: 26px 18px;
+  border-radius: 26px;
+  background: linear-gradient(145deg, #fffdf7, #fceac5);
+  border: 4px solid var(--gold-dark);
+  box-shadow: 0 0 0 6px rgba(247,208,112,0.3), 0 20px 50px rgba(0,0,0,0.8);
+  text-align: center; transition: 0.5s;
+  animation: sealBounce 2s infinite ease-in-out;
+}
+.door-wrap.open .seal { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+@keyframes sealBounce {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.04); }
+}
+.seal-shubh { font-family: 'Yatra One', cursive; font-size: 36px; color: var(--wine); margin: 4px 0; }
+.seal-names { font-family: 'Rozha One', serif; font-size: 30px; color: var(--dark); margin: 6px 0; }
+.tap-btn {
+  display: inline-block; margin-top: 12px; padding: 12px 24px;
+  border-radius: 50px; background: linear-gradient(135deg, var(--wine), var(--maroon));
+  color: #fff; font-size: 15px; border: 2px solid var(--gold);
+  box-shadow: 0 6px 15px rgba(94,11,30,0.4);
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100svh; padding: 34px 14px 50px; text-align: center;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at top, #fde4e8, transparent 55%),
+              linear-gradient(180deg, #fffdf8, #fff0f3);
+  border-bottom: 4px double var(--gold-dark);
+}
+.frame {
+  width: 100%; max-width: 620px; padding: 30px 16px;
+  border: 3px solid var(--gold-dark); border-radius: 28px;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 18px 45px rgba(94,11,30,0.12); position: relative;
+}
+.frame::before {
+  content: ""; position: absolute; inset: 7px;
+  border: 1.5px dashed var(--gold-dark); border-radius: 22px; pointer-events: none;
+}
+.shubh-badge {
+  display: inline-block; margin: 8px auto 16px; padding: 10px 32px;
+  background: linear-gradient(135deg, #7a1129, #4f0718);
+  border: 3px solid var(--gold); border-radius: 60px;
+  box-shadow: 0 8px 22px rgba(94,11,30,0.3);
+}
+.shubh-text {
+  font-family: 'Amita', 'Yatra One', cursive;
+  font-size: clamp(32px, 8.5vw, 48px); color: var(--gold);
+  line-height: 1.25; display: block; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+.intro-txt { font-size: clamp(16px, 4.2vw, 19px); line-height: 1.75; margin: 0 auto 16px; max-width: 450px; }
+.big-name {
+  font-family: 'Rozha One', serif;
+  font-size: clamp(54px, 14vw, 80px); line-height: 1.2;
+  color: var(--maroon); text-shadow: 2px 3px 0px #f5d17f;
+}
+.sang { font-family: 'Yatra One', cursive; font-size: 28px; color: var(--gold-dark); margin: 6px 0; }
+.divider { color: var(--gold-dark); font-size: 20px; margin: 18px auto; }
+.date-pill {
+  display: inline-block; padding: 12px 26px; background: #fff6e0;
+  border: 2px solid var(--gold-dark); border-radius: 16px;
+  font-size: clamp(22px, 6vw, 30px); font-weight: 800; color: var(--maroon);
+}
+
+/* Common Sections & Cards */
+.sec { padding: 60px 16px; text-align: center; }
+.sec-title {
+  font-family: 'Yatra One', serif;
+  font-size: clamp(30px, 7.5vw, 42px); color: var(--maroon); margin-bottom: 10px;
+}
+.sec-sub { font-size: 17px; color: #662230; max-width: 460px; margin: 0 auto 26px; line-height: 1.7; }
+.card {
+  width: 100%; max-width: 480px; margin: 0 auto; padding: 30px 20px;
+  border: 3px solid var(--gold-dark); border-radius: 26px;
+  background: #fff; box-shadow: 0 15px 38px rgba(94,11,30,0.12);
+}
+.lbl { font-size: 14px; color: var(--gold-dark); margin-top: 18px; font-weight: 800; }
+.val { font-size: clamp(20px, 5vw, 24px); font-weight: 800; color: var(--dark); margin-top: 4px; line-height: 1.6; }
 
 /* Countdown */
-.timer { display:flex; justify-content:center; gap:8px; margin:22px auto 0; max-width:400px; }
-.t-box { flex:1; padding:14px 4px; background:#fff6e5; border:2px solid var(--gold-dark); border-radius:14px; }
-.t-box span { display:block; color:var(--maroon); font-size:28px; font-weight:800; }
-.t-box small { font-size:12px; color:#662230; }
+.timer { display: flex; justify-content: center; gap: 10px; margin: 24px auto 0; max-width: 420px; }
+.t-box {
+  flex: 1; padding: 15px 4px; background: linear-gradient(180deg, #fff, #fff6e5);
+  border: 2.5px solid var(--gold-dark); border-radius: 16px;
+}
+.t-box span { display: block; color: var(--maroon); font-size: clamp(26px, 7vw, 34px); font-weight: 800; }
+.t-box small { font-size: 12px; color: #662230; font-weight: 800; }
 
 /* Buttons */
-.btns { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:24px; }
-.btn { display:inline-flex; align-items:center; justify-content:center; padding:14px 24px; border-radius:40px; border:2.5px solid var(--maroon); color:var(--maroon); text-decoration:none; background:#fff; font-size:15px; font-weight:700; cursor:pointer; }
-.btn-pri { background:var(--maroon); color:#fff; border-color:var(--gold-dark); }
+.btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 26px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 14px 24px; min-height: 50px; border-radius: 40px;
+  border: 2.5px solid var(--maroon); color: var(--maroon);
+  text-decoration: none; background: #fff; font-size: 15px; font-weight: 700; cursor: pointer;
+}
+.btn-pri { background: linear-gradient(135deg, var(--wine), var(--maroon)); color: #fff; border-color: var(--gold-dark); }
 
-/* Scratch & Popup */
-.scratch-sec { background:linear-gradient(180deg,#fff5e4,#fde2e7); border-top:3px solid var(--gold-dark); border-bottom:3px solid var(--gold-dark); }
-.scratch-box { width:100%; max-width:320px; margin:16px auto 0; }
-canvas { width:100%; height:auto; display:block; touch-action:none; cursor:crosshair; }
+/* Scratch Card Section */
+.scratch-sec {
+  background: linear-gradient(180deg, #fff5e4, #fde2e7);
+  border-top: 3px solid var(--gold-dark); border-bottom: 3px solid var(--gold-dark);
+}
+.scratch-box { width: 100%; max-width: 330px; margin: 18px auto 0; }
+canvas {
+  width: 100%; height: auto; display: block;
+  touch-action: none; cursor: crosshair; user-select: none;
+  filter: drop-shadow(0 10px 20px rgba(94,11,30,0.2));
+}
 
-.popup { position:fixed; inset:0; z-index:9500; display:none; align-items:center; justify-content:center; padding:18px; background:rgba(45,5,15,0.85); }
-.popup.show { display:flex; }
-.pop-card { width:100%; max-width:380px; padding:32px 20px; border:3px solid var(--gold-dark); border-radius:24px; text-align:center; background:#fffbf2; }
+/* Celebration Popup & Flowers */
+.popup {
+  position: fixed; inset: 0; z-index: 9500;
+  display: none; align-items: center; justify-content: center;
+  padding: 18px; background: rgba(45, 5, 15, 0.82); backdrop-filter: blur(6px);
+}
+.popup.show { display: flex; }
+.pop-card {
+  width: 100%; max-width: 390px; padding: 34px 20px;
+  border: 3px solid var(--gold-dark); border-radius: 26px;
+  text-align: center; background: linear-gradient(180deg, #fff0f3, #fffbf2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
 
-.flowers { position:fixed; inset:0; z-index:9990; pointer-events:none; overflow:hidden; }
-.flw { position:absolute; top:-40px; animation:fall linear forwards; }
-@keyframes fall { 0%{transform:translateY(-20px) rotate(0deg);opacity:1;} 100%{transform:translateY(105vh) rotate(300deg);opacity:0.9;} }
+.flowers { position: fixed; inset: 0; z-index: 9990; pointer-events: none; overflow: hidden; }
+.flw { position: absolute; top: -40px; animation: fall linear forwards; }
+@keyframes fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(108vh) rotate(320deg); opacity: 0.9; }
+}
 
-.footer { padding:40px 16px 80px; text-align:center; background:var(--maroon); color:#fff; border-top:4px solid var(--gold); }
+.footer {
+  padding: 42px 16px 85px; text-align: center;
+  background: var(--maroon); color: #fff; border-top: 4px solid var(--gold);
+}
 </style>
 </head>
+
 <body class="locked">
 
-<audio id="wedAudio" loop preload="auto"><source src="shehnai.mp3" type="audio/mpeg"></audio>
-<button class="music-btn" id="musicBtn" type="button">🎺 <span id="musicTxt">शहनाई: चालू</span></button>
+<!-- Background Wedding Audio & Floating Button -->
+<audio id="wedAudio" loop preload="auto">
+  <source src="shehnai.mp3" type="audio/mpeg">
+</audio>
+<button class="music-btn" id="musicBtn" type="button">
+  <span id="musicIcon">🎺</span> <span id="musicTxt">शहनाई: चालू</span>
+</button>
 
-<!-- 1. 3D ROYAL DOOR -->
-<div class="door-wrap" id="doorWrap">
-  <div class="door door-l"></div>
-  <div class="door door-r"></div>
+<!-- 1. 3D ROYAL DOOR OVERLAY -->
+<div class="door-wrap" id="doorWrap" role="button" tabindex="0">
+  <div class="door door-l">
+    <div class="ornament">❈</div>
+    <div class="ornament">❈</div>
+  </div>
+  <div class="door door-r">
+    <div class="ornament">❈</div>
+    <div class="ornament">❈</div>
+  </div>
   <div class="seal">
     <div style="font-size:15px;color:#5e0b1e;">॥ श्री गणेशाय नमः ॥</div>
-    <div class="seal-title">शुभ विवाह</div>
+    <div class="seal-shubh">शुभ विवाह</div>
     <div class="seal-names">सुनील ♥ प्रिया</div>
     <div style="font-size:14px;color:#5e0b1e;">2 दिसम्बर 2026</div>
-    <div class="tap-btn">🚪 द्वार खोलें (Tap Here) 🎵</div>
+    <div class="tap-btn">🚪 द्वार खोलें (Tap to Open) 🎵</div>
   </div>
 </div>
 
 <!-- 2. HERO SECTION -->
 <header class="hero">
   <div class="frame">
-    <svg width="72" height="72" viewBox="0 0 100 100" fill="none" style="margin:0 auto 6px;display:block;">
-      <circle cx="50" cy="50" r="45" fill="#fff5d6" stroke="#b8862d" stroke-width="3"/>
+    <!-- Ganesh Ji Clipart SVG -->
+    <svg width="76" height="76" viewBox="0 0 100 100" fill="none" style="margin:0 auto 8px;display:block;">
+      <circle cx="50" cy="50" r="46" fill="#fff5d6" stroke="#b8862d" stroke-width="3"/>
       <path d="M50 18 L58 32 L42 32 Z" fill="#b8862d"/>
       <path d="M35 45 C35 34, 65 34, 65 45 C65 58, 52 60, 54 72 C55 77, 63 75, 63 71" stroke="#7a1129" stroke-width="5.5" stroke-linecap="round"/>
-      <circle cx="44" cy="44" r="3" fill="#7a1129"/><circle cx="56" cy="44" r="3" fill="#7a1129"/>
+      <circle cx="44" cy="44" r="3" fill="#7a1129"/>
+      <circle cx="56" cy="44" r="3" fill="#7a1129"/>
+      <path d="M45 36 H55 M43 39 H57" stroke="#d9381e" stroke-width="2" stroke-linecap="round"/>
     </svg>
+
     <div style="font-size:18px;color:#7a1129;margin-bottom:8px;">॥ श्री गणेशाय नमः ॥</div>
-    <div class="shubh-badge"><span class="shubh-text">✨ शुभ विवाह ✨</span></div>
-    <p style="font-size:17px;line-height:1.7;margin-bottom:14px;">ईश्वर की असीम कृपा एवं बुजुर्गों के आशीर्वाद से,<br>हमारे पावन विवाह उत्सव में आपका सादर स्वागत है।</p>
+
+    <div class="shubh-badge">
+      <span class="shubh-text">✨ शुभ विवाह ✨</span>
+    </div>
+
+    <p class="intro-txt">
+      ईश्वर की असीम कृपा एवं बुजुर्गों के आशीर्वाद से,<br>
+      हम आपको अपने पावन विवाह उत्सव में सादर आमंत्रित करते हैं।
+    </p>
+
     <div class="big-name">सुनील</div>
     <div class="sang">❦ संग ❦</div>
     <div class="big-name">प्रिया</div>
+
+    <div class="divider">❖ ─── ❖ ─── ❖</div>
+
     <div class="date-pill">📅 2 दिसम्बर 2026</div>
     <div style="font-size:18px;color:#662230;margin-top:10px;">🕗 रात्रि 8:00 बजे से आपके आगमन तक</div>
+
     <div class="btns">
       <a class="btn btn-pri" href="#invite">📜 निमंत्रण देखें</a>
       <a class="btn" href="#scratch">🎁 सरप्राइज़ खोलें ♥</a>
@@ -117,181 +289,294 @@ canvas { width:100%; height:auto; display:block; touch-action:none; cursor:cross
   </div>
 </header>
 
-<!-- 3. INVITATION DETAILS & TIMER -->
-<section class="sec" id="invite">
-  <h2 class="sec-title">मंगल परिणय निमंत्रण</h2>
-  <div class="card">
-    <div style="font-family:'Rozha One',serif;font-size:38px;color:var(--maroon);">सुनील ♥ प्रिया</div>
-    <div class="lbl">✦ शुभ विवाह दिनांक ✦</div>
-    <div class="val">बुधवार, 2 दिसम्बर 2026</div>
-    <div class="lbl">✦ प्रीतिभोज समय ✦</div>
-    <div class="val">रात्रि 8:00 बजे से</div>
-    <div class="lbl">✦ विवाह स्थल (Venue) ✦</div>
-    <div class="val">रॉयल गार्डन (Royal Garden)<br>गाज़ीपुर, उत्तर प्रदेश</div>
-  </div>
+<!-- 3. INVITATION CARD & COUNTDOWN -->
+<main>
+  <section class="sec" id="invite">
+    <h2 class="sec-title">मंगल परिणय निमंत्रण</h2>
+    <p class="sec-sub">प्यार, खुशियों और नए रिश्तों की इस खूबसूरत शुरुआत में आपका सपरिवार स्वागत है।</p>
 
-  <h3 class="sec-title" style="font-size:28px;margin-top:40px;">⏳ शुभ घड़ी का इंतज़ार</h3>
-  <div class="timer">
-    <div class="t-box"><span id="d">--</span><small>दिन</small></div>
-    <div class="t-box"><span id="h">--</span><small>घंटे</small></div>
-    <div class="t-box"><span id="m">--</span><small>मिनट</small></div>
-    <div class="t-box"><span id="s">--</span><small>सेकंड</small></div>
-  </div>
+    <div class="card">
+      <div style="font-family:'Rozha One',serif;font-size:40px;color:var(--maroon);">सुनील ♥ प्रिया</div>
 
-  <div class="btns">
-    <button class="btn btn-pri" id="shareBtn" type="button">📲 WhatsApp पर शेयर करें</button>
-  </div>
-</section>
+      <div class="lbl">✦ शुभ विवाह दिनांक ✦</div>
+      <div class="val">बुधवार, 2 दिसम्बर 2026</div>
 
-<!-- 4. SCRATCH CARD -->
-<section class="sec scratch-sec" id="scratch">
-  <h2 class="sec-title">एक प्यारा सरप्राइज़</h2>
-  <p style="font-size:17px;">अपनी उंगली से नीचे बने दिल (Heart) को स्क्रैच करें!</p>
-  <div class="scratch-box"><canvas id="scCanvas" width="320" height="280"></canvas></div>
-  <p id="scStatus" style="margin-top:12px;font-size:16px;color:var(--maroon);">✨ स्क्रैच करना शुरू करें...</p>
-</section>
+      <div class="lbl">✦ प्रीतिभोज एवं समय ✦</div>
+      <div class="val">रात्रि 8:00 बजे से</div>
 
-<!-- 5. VENUE MAP -->
-<section class="sec">
-  <h2 class="sec-title">📍 विवाह स्थल (Venue)</h2>
-  <div class="card">
-    <div class="val">Royal Garden (रॉयल गार्डन)</div>
-    <p style="font-size:18px;margin-top:6px;">गाज़ीपुर, उत्तर प्रदेश, भारत</p>
-    <a class="btn btn-pri" style="margin-top:18px;" href="https://www.google.com/maps/search/?api=1&query=Royal+Garden+Ghazipur+Uttar+Pradesh" target="_blank">🗺️ Google Map पर रास्ता देखें</a>
-  </div>
-</section>
+      <div class="lbl">✦ विवाह स्थल (Venue) ✦</div>
+      <div class="val">रॉयल गार्डन (Royal Garden)<br>गाज़ीपुर, उत्तर प्रदेश</div>
+
+      <div class="divider">❖ ─── ❖</div>
+      <p style="font-size:16px;">आपका आशीर्वाद और स्नेह ही हमारे लिए सबसे अनमोल उपहार है।</p>
+    </div>
+
+    <h3 class="sec-title" style="font-size:28px;margin-top:44px;">⏳ शुभ घड़ी का इंतज़ार</h3>
+    <div class="timer">
+      <div class="t-box"><span id="d">--</span><small>दिन</small></div>
+      <div class="t-box"><span id="h">--</span><small>घंटे</small></div>
+      <div class="t-box"><span id="m">--</span><small>मिनट</small></div>
+      <div class="t-box"><span id="s">--</span><small>सेकंड</small></div>
+    </div>
+
+    <div class="btns">
+      <button class="btn btn-pri" id="calBtn" type="button">📅 कैलेंडर में सेव करें</button>
+      <button class="btn" id="shareBtn" type="button">📲 WhatsApp पर शेयर करें</button>
+    </div>
+  </section>
+
+  <!-- 4. SCRATCH CARD SURPRISE -->
+  <section class="sec scratch-sec" id="scratch">
+    <h2 class="sec-title">एक प्यारा सरप्राइज़</h2>
+    <p class="sec-sub">अपनी उंगली से नीचे बने दिल (Heart) को पूरा स्क्रैच करें और सरप्राइज़ देखें!</p>
+    <div class="scratch-box">
+      <canvas id="scCanvas" width="320" height="280"></canvas>
+    </div>
+    <p id="scStatus" style="margin-top:14px;font-size:16px;color:var(--maroon);">✨ दिल को स्क्रैच करना शुरू करें...</p>
+  </section>
+
+  <!-- 5. VENUE & GOOGLE MAPS -->
+  <section class="sec">
+    <div style="font-size:38px;margin-bottom:6px;">📍</div>
+    <h2 class="sec-title">विवाह स्थल (Venue)</h2>
+    <p class="sec-sub">नीचे दिए गए बटन पर टैप करके सीधे गूगल मैप से रास्ता देखें।</p>
+    <div class="card">
+      <div class="val" style="font-size:26px;color:var(--maroon);">Royal Garden (रॉयल गार्डन)</div>
+      <p style="font-size:18px;margin-top:8px;">गाज़ीपुर, उत्तर प्रदेश, भारत</p>
+      <a class="btn btn-pri" style="margin-top:20px;" href="https://www.google.com/maps/search/?api=1&query=Royal+Garden+Ghazipur+Uttar+Pradesh" target="_blank" rel="noopener">🗺️ Google Map पर रास्ता देखें</a>
+    </div>
+  </section>
+</main>
 
 <footer class="footer">
-  <div style="font-family:'Rozha One',serif;font-size:34px;color:var(--gold);">सुनील ♥ प्रिया</div>
+  <div style="font-family:'Rozha One',serif;font-size:36px;color:var(--gold);">सुनील ♥ प्रिया</div>
+  <p style="margin-top:6px;">॥ शुभ विवाह ॥</p>
   <p style="margin-top:6px;">2 दिसम्बर 2026 · रात्रि 8:00 बजे से</p>
-  <p style="margin-top:6px;">हमारी खुशियों में शामिल होने के लिए धन्यवाद।</p>
+  <p style="margin-top:6px;font-size:14px;color:#fce8eb;">हमारी खुशियों में शामिल होने के लिए आपका हृदय से धन्यवाद।</p>
 </footer>
 
+<!-- Celebration Popup -->
 <div class="popup" id="popup">
   <div class="pop-card">
-    <h2 style="font-family:'Yatra One',cursive;font-size:34px;color:var(--maroon);">🎉 शुभ विवाह 🎉</h2>
-    <div style="font-family:'Rozha One',serif;font-size:32px;color:var(--wine);margin:8px 0;">सुनील ♥ प्रिया</div>
-    <p style="font-size:17px;">2 दिसम्बर 2026 | रात्रि 8:00 बजे<br>रॉयल गार्डन, गाज़ीपुर</p>
-    <button class="btn btn-pri" id="closePop" type="button" style="margin-top:18px;">खुशियों में शामिल हों ♥</button>
+    <h2 style="font-family:'Yatra One',cursive;font-size:36px;color:var(--maroon);">🎉 शुभ विवाह 🎉</h2>
+    <div style="font-family:'Rozha One',serif;font-size:34px;color:var(--wine);margin:8px 0;">सुनील ♥ प्रिया</div>
+    <p style="font-size:18px;line-height:1.6;">दो दिल, एक नई शुरुआत!<br>आइए इस खुशी के पल को यादगार बनाएं।</p>
+    <p style="font-size:16px;color:#662230;margin-top:12px;">📅 2 दिसम्बर 2026 | रात्रि 8:00 बजे<br>📍 रॉयल गार्डन, गाज़ीपुर</p>
+    <button class="btn btn-pri" id="closePop" type="button" style="margin-top:20px;">खुशियों में शामिल हों ♥</button>
   </div>
 </div>
 
 <div class="flowers" id="flowers"></div>
 
 <script>
-/* 1. Music & Shehnai Synth */
+/* 1. WEDDING MUSIC & IN-BUILT SHEHNAI SYNTHESIZER */
 const wedAudio = document.getElementById("wedAudio");
 const musicBtn = document.getElementById("musicBtn");
+const musicIcon = document.getElementById("musicIcon");
 const musicTxt = document.getElementById("musicTxt");
-let playing = false, useSynth = false, aCtx = null, sTimer = null;
 
-function playSynth() {
+let playing = false, useSynth = false, aCtx = null, sTimer = null, droneGain = null;
+
+function playShehnaiSynth() {
   if (!aCtx) aCtx = new (window.AudioContext || window.webkitAudioContext)();
   if (aCtx.state === "suspended") aCtx.resume();
-  const notes = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 880, 783.99, 659.25, 587.33];
-  let idx = 0;
-  function step() {
-    if (!playing) return;
-    const f = notes[idx++ % notes.length], now = aCtx.currentTime;
-    const osc = aCtx.createOscillator(), g = aCtx.createGain(), flt = aCtx.createBiquadFilter();
-    osc.type = "sawtooth"; osc.frequency.setValueAtTime(f, now);
-    flt.type = "lowpass"; flt.frequency.setValueAtTime(1300, now);
-    g.gain.setValueAtTime(0.001, now); g.gain.linearRampToValueAtTime(0.06, now + 0.08); g.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
-    osc.connect(flt); flt.connect(g); g.connect(aCtx.destination);
-    osc.start(now); osc.stop(now + 0.55);
-    sTimer = setTimeout(step, 520);
+
+  if (!droneGain) {
+    droneGain = aCtx.createGain();
+    droneGain.gain.setValueAtTime(0.03, aCtx.currentTime);
+    droneGain.connect(aCtx.destination);
+    [261.63, 392.00].forEach(f => {
+      const o = aCtx.createOscillator();
+      o.type = "triangle"; o.frequency.setValueAtTime(f, aCtx.currentTime);
+      o.connect(droneGain); o.start();
+    });
+  } else {
+    droneGain.gain.setTargetAtTime(0.03, aCtx.currentTime, 0.1);
   }
-  clearTimeout(sTimer); step();
+
+  const notes = [
+    {f:523.25, d:0.45}, {f:587.33, d:0.45}, {f:659.25, d:0.65},
+    {f:783.99, d:0.50}, {f:880.00, d:0.50}, {f:1046.50, d:0.85},
+    {f:880.00, d:0.45}, {f:783.99, d:0.65}, {f:659.25, d:0.45},
+    {f:587.33, d:0.45}, {f:523.25, d:0.90}
+  ];
+  let idx = 0;
+
+  function nextNote() {
+    if (!playing) return;
+    const n = notes[idx++ % notes.length], now = aCtx.currentTime;
+    const osc = aCtx.createOscillator(), g = aCtx.createGain(), flt = aCtx.createBiquadFilter();
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(n.f * 0.98, now);
+    osc.frequency.exponentialRampToValueAtTime(n.f, now + 0.08);
+    flt.type = "lowpass"; flt.frequency.setValueAtTime(1350, now);
+    g.gain.setValueAtTime(0.001, now);
+    g.gain.linearRampToValueAtTime(0.065, now + 0.08);
+    g.gain.exponentialRampToValueAtTime(0.001, now + n.d);
+    osc.connect(flt); flt.connect(g); g.connect(aCtx.destination);
+    osc.start(now); osc.stop(now + n.d + 0.05);
+    sTimer = setTimeout(nextNote, n.d * 1000);
+  }
+  clearTimeout(sTimer);
+  nextNote();
+}
+
+function stopShehnaiSynth() {
+  clearTimeout(sTimer);
+  if (droneGain && aCtx) droneGain.gain.setTargetAtTime(0.0001, aCtx.currentTime, 0.15);
 }
 
 async function startMusic() {
-  playing = true; musicTxt.textContent = "शहनाई: चालू";
-  try { await wedAudio.play(); useSynth = false; }
-  catch (e) { useSynth = true; playSynth(); }
+  playing = true;
+  musicIcon.textContent = "🎺";
+  musicTxt.textContent = "शहनाई: चालू";
+  try {
+    await wedAudio.play();
+    useSynth = false;
+  } catch (e) {
+    useSynth = true;
+    playShehnaiSynth();
+  }
 }
 
 function stopMusic() {
-  playing = false; musicTxt.textContent = "शहनाई: बंद";
-  if (useSynth) clearTimeout(sTimer); else wedAudio.pause();
+  playing = false;
+  musicIcon.textContent = "🔇";
+  musicTxt.textContent = "शहनाई: बंद";
+  if (useSynth) stopShehnaiSynth();
+  else wedAudio.pause();
 }
 
-musicBtn.onclick = () => playing ? stopMusic() : startMusic();
+musicBtn.addEventListener("click", () => playing ? stopMusic() : startMusic());
 
-/* 2. Door Open */
+/* 2. ROYAL DOOR TAP TO OPEN */
 const doorWrap = document.getElementById("doorWrap");
-doorWrap.onclick = () => {
+let isDoorOpen = false;
+
+function openDoor() {
+  if (isDoorOpen) return;
+  isDoorOpen = true;
   doorWrap.classList.add("open");
   document.body.classList.remove("locked");
   musicBtn.classList.add("show");
   startMusic();
   rainFlowers(35);
-};
+}
+doorWrap.addEventListener("click", openDoor);
 
-/* 3. Countdown */
-const target = new Date("2026-12-02T20:00:00+05:30").getTime();
-setInterval(() => {
-  const diff = Math.max(0, target - Date.now());
+/* 3. LIVE COUNTDOWN TIMER */
+const weddingTime = new Date("2026-12-02T20:00:00+05:30").getTime();
+function updateTimer() {
+  const diff = Math.max(0, weddingTime - Date.now());
   document.getElementById("d").textContent = Math.floor(diff / 86400000);
   document.getElementById("h").textContent = Math.floor((diff / 3600000) % 24);
   document.getElementById("m").textContent = Math.floor((diff / 60000) % 60);
   document.getElementById("s").textContent = Math.floor((diff / 1000) % 60);
-}, 1000);
+}
+updateTimer();
+setInterval(updateTimer, 1000);
 
-/* 4. Scratch Card */
-const cv = document.getElementById("scCanvas"), ctx = cv.getContext("2d");
-function heart(c) {
-  c.beginPath(); c.moveTo(160, 240);
+/* 4. HEART SCRATCH CARD */
+const cv = document.getElementById("scCanvas");
+const ctx = cv.getContext("2d");
+
+function drawHeart(c) {
+  c.beginPath();
+  c.moveTo(160, 240);
   c.bezierCurveTo(140, 220, 35, 150, 35, 90);
   c.bezierCurveTo(35, 38, 100, 25, 160, 80);
   c.bezierCurveTo(220, 25, 285, 38, 285, 90);
-  c.bezierCurveTo(285, 150, 180, 220, 160, 240); c.closePath();
+  c.bezierCurveTo(285, 150, 180, 220, 160, 240);
+  c.closePath();
 }
-ctx.save(); heart(ctx);
-ctx.fillStyle = "#f7d070"; ctx.fill();
-ctx.strokeStyle = "#7a1129"; ctx.lineWidth = 4; ctx.stroke(); ctx.clip();
-ctx.fillStyle = "#5e0b1e"; ctx.textAlign = "center";
-ctx.font = "700 20px Poppins"; ctx.fillText("यहाँ स्क्रैच करें ♥", 160, 140);
+
+ctx.save();
+drawHeart(ctx);
+const grad = ctx.createLinearGradient(35, 35, 280, 240);
+grad.addColorStop(0, "#f7d070");
+grad.addColorStop(0.5, "#fff2bd");
+grad.addColorStop(1, "#c9933b");
+ctx.fillStyle = grad;
+ctx.fill();
+ctx.strokeStyle = "#7a1129";
+ctx.lineWidth = 4;
+ctx.stroke();
+ctx.clip();
+ctx.fillStyle = "#5e0b1e";
+ctx.textAlign = "center";
+ctx.font = "700 20px Poppins, sans-serif";
+ctx.fillText("यहाँ स्क्रैच करें", 160, 125);
+ctx.font = "32px serif";
+ctx.fillText("♥", 160, 162);
 ctx.restore();
 
-let down = false, moves = 0, done = false;
-function scratch(e) {
-  if (!down || done) return;
+let scratching = false, scratchMoves = 0, scratchDone = false;
+
+function doScratch(e) {
+  if (!scratching || scratchDone) return;
   const r = cv.getBoundingClientRect();
-  const x = (e.clientX - r.left) * (320 / r.width), y = (e.clientY - r.top) * (280 / r.height);
+  const x = (e.clientX - r.left) * (320 / r.width);
+  const y = (e.clientY - r.top) * (280 / r.height);
   ctx.globalCompositeOperation = "destination-out";
-  ctx.beginPath(); ctx.arc(x, y, 26, 0, Math.PI * 2); ctx.fill();
-  if (++moves > 45) {
-    done = true; ctx.clearRect(0, 0, 320, 280);
+  ctx.beginPath();
+  ctx.arc(x, y, 25, 0, Math.PI * 2);
+  ctx.fill();
+
+  scratchMoves++;
+  if (scratchMoves > 45) {
+    scratchDone = true;
+    ctx.clearRect(0, 0, 320, 280);
     document.getElementById("scStatus").textContent = "🎉 सरप्राइज़ खुल गया! ♥";
     document.getElementById("popup").classList.add("show");
-    rainFlowers(50);
+    rainFlowers(55);
   }
 }
-cv.onpointerdown = (e) => { down = true; scratch(e); };
-cv.onpointermove = scratch;
-window.onpointerup = () => down = false;
 
-document.getElementById("closePop").onclick = () => document.getElementById("popup").classList.remove("show");
+cv.addEventListener("pointerdown", (e) => { e.preventDefault(); scratching = true; doScratch(e); });
+cv.addEventListener("pointermove", (e) => { e.preventDefault(); doScratch(e); });
+window.addEventListener("pointerup", () => { scratching = false; });
 
-/* 5. Flowers & Share */
-function rainFlowers(count) {
-  const box = document.getElementById("flowers"), icons = ["🌸","🌺","🌼","✨"];
-  for (let i = 0; i < count; i++) {
+document.getElementById("closePop").addEventListener("click", () => {
+  document.getElementById("popup").classList.remove("show");
+});
+
+/* 5. FLOWER RAIN ANIMATION */
+function rainFlowers(total) {
+  const box = document.getElementById("flowers");
+  const icons = ["🌸", "🌺", "🌼", "🌷", "✨"];
+  for (let i = 0; i < total; i++) {
     setTimeout(() => {
-      const s = document.createElement("span"); s.className = "flw";
-      s.textContent = icons[i % icons.length];
-      s.style.left = (Math.random() * 92) + "vw";
-      s.style.fontSize = (20 + Math.random() * 14) + "px";
-      s.style.animationDuration = (3 + Math.random() * 3) + "s";
-      box.appendChild(s); setTimeout(() => s.remove(), 6000);
-    }, i * 120);
+      const f = document.createElement("span");
+      f.className = "flw";
+      f.textContent = icons[i % icons.length];
+      f.style.left = (Math.random() * 92) + "vw";
+      f.style.fontSize = (20 + Math.random() * 16) + "px";
+      f.style.animationDuration = (3 + Math.random() * 3) + "s";
+      box.appendChild(f);
+      setTimeout(() => f.remove(), 6000);
+    }, i * 110);
   }
 }
 
-document.getElementById("shareBtn").onclick = () => {
-  const txt = "✨ शुभ विवाह ✨\nसुनील ♥ प्रिया\n📅 2 दिसम्बर 2026 | रात्रि 8:00 बजे\n📍 रॉयल गार्डन, गाज़ीपुर\n" + location.href;
+/* 6. SHARE & SAVE TO CALENDAR */
+document.getElementById("shareBtn").addEventListener("click", () => {
+  const txt = "✨ ॥ शुभ विवाह ॥ ✨\nसुनील ♥ प्रिया\n📅 2 दिसम्बर 2026 | रात्रि 8:00 बजे\n📍 रॉयल गार्डन, गाज़ीपुर\n\nनिमंत्रण देखने के लिए लिंक खोलें:\n" + location.href;
   window.open("https://wa.me/?text=" + encodeURIComponent(txt), "_blank");
-};
+});
+
+document.getElementById("calBtn").addEventListener("click", () => {
+  const ics = [
+    "BEGIN:VCALENDAR", "VERSION:2.0", "BEGIN:VEVENT",
+    "DTSTART:20261202T143000Z", "DTEND:20261202T183000Z",
+    "SUMMARY:शुभ विवाह - सुनील संग प्रिया",
+    "LOCATION:Royal Garden, Ghazipur, Uttar Pradesh",
+    "END:VEVENT", "END:VCALENDAR"
+  ].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], {type: "text/calendar"}));
+  a.download = "Sunil-Priya-Wedding.ics";
+  a.click();
+});
 </script>
 </body>
 </html>
